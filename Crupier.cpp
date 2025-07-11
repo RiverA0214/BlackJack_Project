@@ -8,7 +8,7 @@ Crupier::Crupier()
 
 // Muestra solo la primera carta (ocultando el resto)
 void Crupier::mostrarManoInicial() const {
-    std::cout << nombre << " muestra:" << std::endl;
+    std::cout <<"\n"<<nombre << " muestra:" << std::endl;
     if (!mano.seHaPasado() && !mano.tieneBlackjack() && calcularMano() > 0) {
         // Muestra solo la primera carta visible
         mano.mostrar(); // alternativa simple

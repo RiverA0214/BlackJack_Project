@@ -31,10 +31,16 @@ void Jugador::mostrarMano(bool mostrarTodas) const {
     }
 }
 
-// Por defecto, un jugador siempre pide carta (sobrescribible)
 bool Jugador::quiereCarta() const {
-    // Esta lógica se debe redefinir en un derivado (jugador humano o IA)
-    return calcularMano() < 17; // comportamiento por defecto
+    int seleccion;
+    std::cout<<"1. Pedir\n 2.Quedarse"<<std::endl;
+    std::cin>>seleccion;
+    if(seleccion==1){
+        return true;
+    }
+    else{
+        return false;
+    }
 }
 
 // Retorna true si tiene blackjack

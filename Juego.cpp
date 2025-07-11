@@ -6,8 +6,10 @@
 Juego::Juego(int numJugadores) {
     for (int i = 0; i < numJugadores; ++i) {
         std::string nombre;
-        std::cout << "Ingrese el nombre del jugador " << i + 1 << ": ";
+        std::cout << "Ingrese el nombre del jugador " << i + 1 << ": ";;
+        std::cout<<"\n";
         std::getline(std::cin, nombre);
+        std::cout<<"\n";
         jugadores.emplace_back(nombre, 100.0); // dinero inicial fijo
     }
 }
@@ -38,14 +40,13 @@ void Juego::repartirCartasIniciales() {
     }
 
     crupier.recibirCarta(mazo.repartir());
-    crupier.recibirCarta(mazo.repartir());
 
     for (const auto& jugador : jugadores) {
         jugador.mostrarMano();
     }
 
-    std::cout << "\nCrupier muestra:" << std::endl;
     crupier.mostrarManoInicial();
+
 }
 
 // Cada jugador toma sus decisiones
@@ -66,7 +67,7 @@ void Juego::jugarTurnos() {
 // Turno automático del crupier
 void Juego::turnoCrupier() {
     std::cout << "\nTurno del Crupier:" << std::endl;
-    crupier.mostrarMano();
+    crupier.recibirCarta(mazo.repartir());
 
     while (crupier.quiereCarta()) {
         std::cout << "Crupier pide carta..." << std::endl;
