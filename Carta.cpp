@@ -1,29 +1,26 @@
-
 #include "Carta.h"
-using namespace std;
+#include <iostream>
 
-   Carta::Carta(std::string palo, std::string valor, int valorNumerico){
+// Constructor
+Carta::Carta(std::string palo, std::string valor, int valorNumerico)
+    : palo(palo), valor(valor), valorNumerico(valorNumerico) {}
 
-    }
-    
-    /// retorna  Palo de la carta
-    std::string Carta::getPalo() const{
+// Obtener el palo
+std::string Carta::getPalo() const {
+    return palo;
+}
 
+// Obtener el valor nominal (ej. "A", "2", "K", etc.)
+std::string Carta::getValor() const {
+    return valor;
+}
 
-    }
-    
-    /// retorna  Valor nominal de la carta (ej. "A", "K")
-    std::string Carta::getValor() const{
+// Obtener el valor según reglas de Blackjack
+int Carta::getValorNumerico() const {
+    return valorNumerico;
+}
 
-
-    }
-    
-    /// retorna Valor numérico según reglas del blackjack
-    int Carta::getValorNumerico() const{
-
-    }
-    
-    /// Muestra la carta en formato "valor de palo"
-    void Carta::mostrar() const{
-        
-    }
+// Mostrar en formato "valor de palo"
+void Carta::mostrar() const {
+    std::cout << valor << " de " << palo << std::endl;
+}
