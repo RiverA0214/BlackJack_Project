@@ -2,7 +2,7 @@
 #include <algorithm> // std::shuffle
 #include <random>    // std::default_random_engine
 #include <chrono>    // std::chrono::system_clock
-
+#include <stdexcept>
 // Constructor: crea las 52 cartas
 Mazo::Mazo() {
     std::vector<std::string> palos = {"Corazones", "Diamantes", "Tréboles", "Picas"};

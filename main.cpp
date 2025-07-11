@@ -1,5 +1,5 @@
 #include "Juego.h"
-
+#include <iostream>
 int main() {
     Juego juego(1); // Puedes cambiar el número de jugadores
     char opcion;
