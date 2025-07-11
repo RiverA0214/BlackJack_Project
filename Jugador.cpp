@@ -33,7 +33,7 @@ void Jugador::mostrarMano(bool mostrarTodas) const {
 
 bool Jugador::quiereCarta() const {
     int seleccion;
-    std::cout<<"1. Pedir\n 2.Quedarse"<<std::endl;
+    std::cout<<"\n"<<"1. Pedir\n2.Quedarse"<<std::endl;
     std::cin>>seleccion;
     if(seleccion==1){
         return true;
