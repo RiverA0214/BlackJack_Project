@@ -50,7 +50,11 @@ public:
     
     // Prepara la mano para nueva ronda
     void limpiarMano();
-    
+    //
+    double getDinero(){return dinero;}
+    //Genera una apuesta por mano
+    double apuesta();
+
     // Retorna nombre del jugador
     std::string getNombre() const;
 };

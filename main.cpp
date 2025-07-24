@@ -1,6 +1,12 @@
 #include "Juego.h"
 #include <iostream>
 int main() {
+    //int cantidadJugadores;
+    //std::cout<<"Ingrese la cantida de jugadores: ";
+    //std::cin>>cantidadJugadores;
+    //std::cout<<cantidadJugadores;
+        
+
     Juego juego(1); // Puedes cambiar el número de jugadores
     char opcion;
 

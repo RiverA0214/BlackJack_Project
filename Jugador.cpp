@@ -62,3 +62,16 @@ void Jugador::limpiarMano() {
 std::string Jugador::getNombre() const {
     return nombre;
 }
+double Jugador::apuesta(){
+    double saldoApuesta;
+    std::cout<<"Saldo disponible: $"<<getDinero()<<std::endl;
+    std::cout<<"Ingrese apuesta: "<<std::endl;
+    std::cin>>saldoApuesta;
+    if(saldoApuesta>getDinero()){
+        std::cout<<"Apostando todo en la cuenta $"<<getDinero()<<std::endl;
+        return getDinero();
+    }else{
+        std::cout<<"Apostaste $"<<saldoApuesta<<" Buena Suerte"<<std::endl;
+        return saldoApuesta;
+    }
+}

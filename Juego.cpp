@@ -6,7 +6,7 @@
 Juego::Juego(int numJugadores) {
     for (int i = 0; i < numJugadores; ++i) {
         std::string nombre;
-        std::cout << "Ingrese el nombre del jugador " << i + 1 << ": ";;
+        std::cout << "Ingrese el nombre del jugador " << i + 1 << ": ";
         std::cout<<"\n";
         std::getline(std::cin, nombre);
         std::cout<<"\n";
