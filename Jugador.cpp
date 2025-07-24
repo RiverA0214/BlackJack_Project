@@ -69,9 +69,19 @@ double Jugador::apuesta(){
     std::cin>>saldoApuesta;
     if(saldoApuesta>getDinero()){
         std::cout<<"Apostando todo en la cuenta $"<<getDinero()<<std::endl;
+        setApuesta(getDinero());
+        setDinero(0);
         return getDinero();
     }else{
         std::cout<<"Apostaste $"<<saldoApuesta<<" Buena Suerte"<<std::endl;
+        setApuesta(saldoApuesta);
+        setDinero(getDinero()-saldoApuesta);
         return saldoApuesta;
     }
+}
+void Jugador::setApuesta(double apuesta){
+    apuestaActual=apuesta;
+}
+void Jugador::setDinero(double ganancia){
+    dinero=ganancia+getDinero();
 }

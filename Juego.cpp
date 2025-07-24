@@ -91,16 +91,30 @@ void Juego::determinarGanadores() {
 
         if (jugador.seHaPasado()) {
             std::cout << jugador.getNombre() << " pierde (se pasó)." << std::endl;
+            std::cout<<"Perdio $"<<jugador.getApuesta()<<std::endl;
+
         } else if (crupier.seHaPasado()) {
             std::cout << jugador.getNombre() << " gana (crupier se pasó)." << std::endl;
+            jugador.setDinero(2*jugador.getApuesta());
+            std::cout <<"Gano $"<<2*jugador.getApuesta()<<std::endl; 
+
         } else if (jugador.tieneBlackjack() && !crupier.tieneBlackjack()) {
             std::cout << jugador.getNombre() << " gana con Blackjack!" << std::endl;
+            jugador.setDinero(2*jugador.getApuesta());
+            std::cout <<"Gano $"<<2*jugador.getApuesta()<<std::endl; 
         } else if (valorJugador > valorCrupier) {
             std::cout << jugador.getNombre() << " gana." << std::endl;
+            jugador.setDinero(2*jugador.getApuesta());
+            std::cout <<"Gano $"<<2*jugador.getApuesta()<<std::endl; 
+
         } else if (valorJugador < valorCrupier) {
             std::cout << jugador.getNombre() << " pierde." << std::endl;
+            std::cout<<"Perdio $"<<jugador.getApuesta()<<std::endl;
+
         } else {
             std::cout << jugador.getNombre() << " empata con el crupier." << std::endl;
+            std::cout<<"Empato, se retornan $"<<jugador.getApuesta()<<std::endl;
+            jugador.setDinero(jugador.getApuesta());
         }
     }
 }

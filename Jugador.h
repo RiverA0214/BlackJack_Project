@@ -25,6 +25,7 @@ protected:
     std::string nombre;
     Mano mano;
     double dinero;
+    double apuestaActual;
     
 public:
     // Crea un nuevo jugador
@@ -52,9 +53,11 @@ public:
     void limpiarMano();
     //
     double getDinero(){return dinero;}
+    void setDinero(double);
     //Genera una apuesta por mano
     double apuesta();
-
+    void setApuesta(double);
+    double getApuesta(){return apuestaActual;}
     // Retorna nombre del jugador
     std::string getNombre() const;
 };
