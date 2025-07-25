@@ -55,8 +55,9 @@ void Mano::mostrar() const {
     for (const auto& carta : cartas) {
         carta.mostrar();
     }
-    std::cout << "Total: " << calcularValor() << std::endl;
+    std::cout << "Valor total: " << calcularValor() << "\n";
 }
+
 
 // Vacía la mano para una nueva ronda
 void Mano::limpiar() {

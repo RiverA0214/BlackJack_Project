@@ -1,5 +1,6 @@
 #include "Carta.h"
 #include <iostream>
+#include <iomanip> // para setw
 
 // Constructor
 Carta::Carta(std::string palo, std::string valor, int valorNumerico)
@@ -22,5 +23,9 @@ int Carta::getValorNumerico() const {
 
 // Mostrar en formato "valor de palo"
 void Carta::mostrar() const {
-    std::cout << valor << " de " << palo << std::endl;
+    std::cout << "+-----------+\n";
+    std::cout << "| " << std::left << std::setw(2) << valor << "        |\n";
+    std::cout << "|           |\n";
+    std::cout << "| " << std::setw(9) << palo << "|\n";
+    std::cout << "+-----------+\n";
 }

@@ -21,45 +21,43 @@
 #include "Mano.h"
 
 class Jugador {
-protected:
+private:
     std::string nombre;
-    Mano mano;
     double dinero;
     double apuestaActual;
-    
+    Mano mano;
+
 public:
-    // Crea un nuevo jugador
-    Jugador(std::string nombre, double dineroInicial);
-    
-    // Recibe una carta en su mano
-    void recibirCarta(const Carta& carta);
-    
-    // Retorna valor total de la mano
-    int calcularMano() const;
-    
-    // Muestra la mano del jugador
-    void mostrarMano(bool mostrarTodas = true) const;
-    
-    // Retorna true si quiere otra carta
-    virtual bool quiereCarta() const;
-    
-    // Retorna true si tiene blackjack
-    bool tieneBlackjack() const;
-    
-    // Retorna true si se pasó de 21
-    bool seHaPasado() const;
-    
-    // Prepara la mano para nueva ronda
-    void limpiarMano();
-    //
-    double getDinero(){return dinero;}
-    void setDinero(double);
-    //Genera una apuesta por mano
-    double apuesta();
-    void setApuesta(double);
-    double getApuesta(){return apuestaActual;}
-    // Retorna nombre del jugador
+
+    // Constructor
+    Jugador(const std::string& nombre, double dineroInicial);
+
+    virtual ~Jugador();  //destructor virtual
+
+    // Información del jugador
     std::string getNombre() const;
+    
+    // Apuesta y dinero
+    void setApuesta(double apuesta);
+    double getApuesta() const;
+    
+    void setDinero(double nuevoSaldo);       // asigna directamente
+    void sumarDinero(double cantidad);       // suma ganancias
+    double getDinero() const;
+
+    // Lógica de apuestas
+    double apuesta(); // solicita y procesa apuesta del jugador
+
+    // Lógica del juego
+    virtual bool quiereCarta() const;
+
+    void recibirCarta(const Carta& carta);
+    int calcularMano() const;
+    bool tieneBlackjack() const;
+    bool seHaPasado() const;
+
+    void mostrarMano() const;
+    void limpiarMano();
 };
 
 #endif

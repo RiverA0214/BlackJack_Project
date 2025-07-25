@@ -1,6 +1,16 @@
 #include "Juego.h"
 #include <iostream>
 #include <limits> // para limpiar el input
+#include <iomanip>  // para setw
+
+
+//Apuestas
+void Juego::pedirApuestas() {
+    for (auto& jugador : jugadores) {
+        jugador.apuesta(); 
+    }
+}
+
 
 // Constructor: crea los jugadores con nombres y dinero inicial
 Juego::Juego(int numJugadores) {
@@ -19,18 +29,36 @@ void Juego::iniciarRonda() {
     mazo = Mazo();      // nuevo mazo
     mazo.barajar();
 
+    pedirApuestas();   
+
     repartirCartasIniciales();
     jugarTurnos();
     turnoCrupier();
     determinarGanadores();
     mostrarResultados();
 
-    // Preparar para la siguiente ronda
     for (auto& jugador : jugadores) {
         jugador.limpiarMano();
     }
     crupier.limpiarMano();
+
+    // Eliminar jugadores sin dinero
+    for (auto it = jugadores.begin(); it != jugadores.end(); ) {
+        if (it->getDinero() <= 0) {
+            std::cout << it->getNombre() << " se ha quedado sin dinero y abandona el juego.\n";
+            it = jugadores.erase(it);
+        } else {
+            ++it;
+        }
 }
+
+if (jugadores.empty()) {
+    std::cout << "Todos los jugadores se han quedado sin dinero. Fin del juego.\n";
+    exit(0);
+}
+
+}
+
 
 // Reparte 2 cartas a cada jugador y al crupier
 void Juego::repartirCartasIniciales() {
@@ -89,54 +117,71 @@ void Juego::determinarGanadores() {
     for (auto& jugador : jugadores) {
         int valorJugador = jugador.calcularMano();
 
-        if (jugador.seHaPasado()) {
+        if (jugador.seHaPasado() && crupier.seHaPasado()) {
+            std::cout << jugador.getNombre() << " y el Crupier se pasaron. Empate." << std::endl;
+            std::cout << "Se retornan $" << jugador.getApuesta() << std::endl;
+            jugador.sumarDinero(jugador.getApuesta());
+        }
+        else if (jugador.seHaPasado()) {
             std::cout << jugador.getNombre() << " pierde (se pasó)." << std::endl;
-            std::cout<<"Perdio $"<<jugador.getApuesta()<<std::endl;
-
-        } else if (crupier.seHaPasado()) {
+            std::cout << "Perdio $" << jugador.getApuesta() << std::endl;
+        }
+        else if (crupier.seHaPasado()) {
             std::cout << jugador.getNombre() << " gana (crupier se pasó)." << std::endl;
-            jugador.setDinero(2*jugador.getApuesta());
-            std::cout <<"Gano $"<<2*jugador.getApuesta()<<std::endl; 
-
-        } else if (jugador.tieneBlackjack() && !crupier.tieneBlackjack()) {
+            jugador.sumarDinero(2 * jugador.getApuesta());
+            std::cout << "Gano $" << 2 * jugador.getApuesta() << std::endl;
+        }
+        else if (jugador.tieneBlackjack() && !crupier.tieneBlackjack()) {
             std::cout << jugador.getNombre() << " gana con Blackjack!" << std::endl;
-            jugador.setDinero(2*jugador.getApuesta());
-            std::cout <<"Gano $"<<2*jugador.getApuesta()<<std::endl; 
-        } else if (valorJugador > valorCrupier) {
+            jugador.sumarDinero(2 * jugador.getApuesta());
+            std::cout << "Gano $" << 2 * jugador.getApuesta() << std::endl;
+        }
+        else if (valorJugador > valorCrupier) {
             std::cout << jugador.getNombre() << " gana." << std::endl;
-            jugador.setDinero(2*jugador.getApuesta());
-            std::cout <<"Gano $"<<2*jugador.getApuesta()<<std::endl; 
-
-        } else if (valorJugador < valorCrupier) {
+            jugador.sumarDinero(2 * jugador.getApuesta());
+            std::cout << "Gano $" << 2 * jugador.getApuesta() << std::endl;
+        }
+        else if (valorJugador < valorCrupier) {
             std::cout << jugador.getNombre() << " pierde." << std::endl;
-            std::cout<<"Perdio $"<<jugador.getApuesta()<<std::endl;
-
-        } else {
+            std::cout << "Perdio $" << jugador.getApuesta() << std::endl;
+        }
+        else {
             std::cout << jugador.getNombre() << " empata con el crupier." << std::endl;
-            std::cout<<"Empato, se retornan $"<<jugador.getApuesta()<<std::endl;
-            jugador.setDinero(jugador.getApuesta());
+            std::cout << "Empato, se retornan $" << jugador.getApuesta() << std::endl;
+            jugador.sumarDinero(jugador.getApuesta());
         }
     }
 }
 
+
 // Muestra resultados finales (resumen simple)
 void Juego::mostrarResultados() const {
-    std::cout << "\n=== Resultados Finales ===" << std::endl;
+   int valorCrupier = crupier.calcularMano();
+
+    std::cout << std::left << std::setw(15) << "Jugador"
+            << std::setw(10) << "Puntos"
+            << std::setw(10) << "Estado" << "\n";
+    std::cout << "--------------------------------------\n";
+
     for (const auto& jugador : jugadores) {
-        std::cout << jugador.getNombre() << ": " << jugador.calcularMano();
+        std::string estado;
+
         if (jugador.seHaPasado()) {
-            std::cout << " (Se pasó)";
-        } else if (jugador.tieneBlackjack()) {
-            std::cout << " (Blackjack)";
+            estado = "Se pasó";
         }
-        std::cout << std::endl;
+        else if (jugador.tieneBlackjack()) {
+            estado = "Blackjack";
+        }
+        else if (!crupier.seHaPasado() && jugador.calcularMano() == valorCrupier) {
+            estado = "Empate";
+        }
+        else {
+            estado = "Ganó";
+        }
+
+        std::cout << std::left << std::setw(15) << jugador.getNombre()
+                << std::setw(10) << jugador.calcularMano()
+                << std::setw(10) << estado << "\n";
     }
 
-    std::cout << "Crupier: " << crupier.calcularMano();
-    if (crupier.seHaPasado()) {
-        std::cout << " (Se pasó)";
-    } else if (crupier.tieneBlackjack()) {
-        std::cout << " (Blackjack)";
-    }
-    std::cout << std::endl;
 }

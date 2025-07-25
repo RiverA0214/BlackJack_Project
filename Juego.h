@@ -48,6 +48,9 @@ public:
     
     // Muestra los resultados finales de la ronda
     void mostrarResultados() const;
+
+    //Pide las apuestas al iniciar
+    void pedirApuestas();
 };
 
 #endif
