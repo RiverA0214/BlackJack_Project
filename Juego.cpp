@@ -172,10 +172,12 @@ void Juego::mostrarResultados() const {
         else if (jugador.tieneBlackjack()) {
             estado = "Blackjack";
         }
-        else if (!crupier.seHaPasado() && jugador.calcularMano() == valorCrupier) {
+        else if (!crupier.seHaPasado() && jugador.calcularMano() == crupier.calcularMano()) {
             estado = "Empate";
         }
-        else {
+        else if(jugador.calcularMano() < valorCrupier && !crupier.seHaPasado()) {
+            estado = "Perdió";
+        }else{
             estado = "Ganó";
         }
 
