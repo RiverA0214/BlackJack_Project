@@ -13,8 +13,6 @@ void Crupier::mostrarManoInicial() const {
     if (!seHaPasado() && !tieneBlackjack() && calcularMano() > 0) {
         // Mostrar solo la primera carta
         std::cout << "[Carta 1]: ";
-        // Necesitas un método para obtener la primera carta de la mano
-        // O simplemente usar mostrarMano() si solo hay una carta visible
         mostrarMano(); // Muestra todas las cartas (temporalmente)
     } else {
         std::cout << "[Carta oculta]" << std::endl;

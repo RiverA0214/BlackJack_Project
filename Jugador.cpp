@@ -84,9 +84,6 @@ std::string Jugador::getNombre() const {
     return nombre;
 }
 
-#include "Jugador.h"
-#include <iostream>
-
 bool Jugador::quiereCarta() const {
     char respuesta;
     std::cout << nombre << ", ¿quieres otra carta? (s/n): ";

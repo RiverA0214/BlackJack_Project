@@ -21,7 +21,7 @@ int Carta::getValorNumerico() const {
     return valorNumerico;
 }
 
-// Mostrar en formato "valor de palo"
+// Mostrar en formato Carta
 void Carta::mostrar() const {
     std::cout << "+-----------+\n";
     std::cout << "| " << std::left << std::setw(2) << valor << "        |\n";

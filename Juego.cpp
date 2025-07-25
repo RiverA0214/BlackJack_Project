@@ -154,7 +154,7 @@ void Juego::determinarGanadores() {
 }
 
 
-// Muestra resultados finales (resumen simple)
+// Muestra resultados finales
 void Juego::mostrarResultados() const {
    int valorCrupier = crupier.calcularMano();
 

@@ -7,7 +7,7 @@ int main() {
     //std::cout<<cantidadJugadores;
         
 
-    Juego juego(1); // Puedes cambiar el número de jugadores
+    Juego juego(2); // Puedes cambiar el número de jugadores
     char opcion;
 
     do {
